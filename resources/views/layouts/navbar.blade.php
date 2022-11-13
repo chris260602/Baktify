@@ -14,13 +14,13 @@
                     @if (auth()->user()->role === '0')
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                             <li class="nav-item">
-                                <a class="nav-link active fw-bold" aria-current="page" href="/about-us">About Us</a>
+                                <a class="link-dark nav-link active fw-bold" aria-current="page" href="/about-us">About Us</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link active fw-bold" aria-current="page" href="/products">Products</a>
+                                <a class="link-dark nav-link active fw-bold" aria-current="page" href="/products">Products</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link active fw-bold" aria-current="page" href="/transactions">My
+                                <a class="link-dark nav-link active fw-bold" aria-current="page" href="/transactions">My
                                     Transactions</a>
                             </li>
                         </ul>
@@ -35,13 +35,13 @@
                     @elseif (auth()->user()->role === '1')
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                             <li class="nav-item">
-                                <a class="nav-link active fw-bold" aria-current="page" href="/about-us">About Us</a>
+                                <a class="link-dark nav-link active fw-bold" aria-current="page" href="/about-us">About Us</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link active fw-bold" aria-current="page" href="/products">Manage Products</a>
+                                <a class="link-dark nav-link active fw-bold" aria-current="page" href="/products">Manage Products</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link active fw-bold" aria-current="page" href="/category">Add Category</a>
+                                <a class="link-dark nav-link active fw-bold" aria-current="page" href="/category">Add Category</a>
                             </li>
                         </ul>
                         <div class="d-flex flex-column text-secondary">
@@ -55,10 +55,10 @@
                 @guest
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link active fw-bold" aria-current="page" href="/about-us">About Us</a>
+                            <a class="link-dark nav-link active fw-bold" aria-current="page" href="/about-us">About Us</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active fw-bold" aria-current="page" href="/products">Products</a>
+                            <a class="link-dark nav-link active fw-bold" aria-current="page" href="/products">Products</a>
                         </li>
                     </ul>
                     <div>
