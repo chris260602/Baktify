@@ -23,4 +23,11 @@ class LoginController extends Controller
         }
         return back()->with('loginError', 'Invalid Email or Password');
     }
+    public function logoff(Request $request)
+    {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect("/home");
+    }
 }
