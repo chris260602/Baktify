@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductsController;
@@ -40,7 +41,11 @@ Route::get("/products", [ProductsController::class, "index"]);
 Route::get("/products/{id}", [ProductsController::class, "viewProductDetail"]);
 Route::delete("/products/{id}",[ProductsController::class, "deleteProduct"]);
 
-Route::get("/add-products", function(){
-    return view('pages/addProduct');
-});
+Route::get("/add-products", [ProductsController::class, "viewAddProduct"]);
 Route::post("/add-products", [ProductsController::class, "addProduct"]);
+
+Route::get("/edit-product/{id}", [ProductsController::class, "viewEditProduct"]);
+Route::post("/edit-product/{id}", [ProductsController::class, "editProduct"]);
+
+Route::get('/add-category', [CategoryController::class, 'index']);
+Route::post('/add-category', [CategoryController::class, 'addCategory']);
