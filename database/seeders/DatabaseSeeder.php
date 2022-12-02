@@ -19,18 +19,20 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+
         $categories = ['Pop', 'Rock', 'Dubstep', 'Jazz'];
-        for ($i=0; $i < 4; $i++) {
+        for ($i = 0; $i < 4; $i++) {
             Category::factory()->create([
                 'name' => $categories[$i],
             ]);
         }
-        for ($i=1; $i <= 10 ; $i++) {
+        for ($i = 1; $i <= 10; $i++) {
             Product::factory()->create([
-                'image' => 'dummyProduct'.$i.'.jpg',
+                'image' => 'dummyProduct' . $i . '.jpg',
             ]);
-            Storage::putFileAs('/productImages', 'public/images/seederImages/'.'dummyProduct'.$i.'.jpg', 'dummyProduct'.$i.'.jpg');
+            Storage::putFileAs('/productImages', 'public/images/seederImages/' . 'dummyProduct' . $i . '.jpg', 'dummyProduct' . $i . '.jpg');
         }
+        // \App\Models\Cart::factory(10)->create();
         User::factory()->create([
             'email' => 'admin@gmail.com',
             'password' => Hash::make('123123123'),

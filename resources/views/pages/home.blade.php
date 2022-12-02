@@ -4,7 +4,6 @@
 
 @section('content')
     <section class="mx-5 px-5">
-        {{-- {{ dd(auth()->user()) }} --}}
         <section class="p-5 d-flex flex-column align-items-center">
             <div class="pt-3 pb-5 d-flex justify-content-center">
                 <h1 class="w-75 fw-bold text-center">Level Up Your Music Collection</h1>
