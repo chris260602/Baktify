@@ -3,22 +3,17 @@
 @section('title', 'Products | Baktify')
 
 @section('content')
-    <div class="container ">
-        <div class="row mb-5">
-            <div class="col-12 d-flex justify-content-between">
-                <img src="https://getbootstrap.com/docs/5.2/assets/brand/bootstrap-social.png" class="w-25" alt="">
-
-                <div class="d-flex flex-column">
-                    <h2>Come On Over</h2>
-                    <p>Cone on Over is Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum saepe rerum eius iure
-                        culpa aut? Architecto, ipsa. In recusandae doloremque vel, hic blanditiis voluptate quaerat deserunt
-                        consequuntur ullam iste exercitationem.</p>
-                    <p>Stock: 250</p>
-                    <p>Category: Country</p>
-                </div>
-            </div>
+  <div class="container p-5">
+    <div class="row mb-5">
+      <div class="col-12 d-flex justify-content-start">
+        <img src="/storage/productImages/{{$product->image}}" class="w-25" alt="{{$product->name}}">
+        <div class="d-flex flex-column ps-5">
+          <h2>{{ $product->name }}</h2>
+          <p>{{ $product->description }}</p>
+          <p><b>Stock:</b> {{ $product->stock }}</p>
+          <p><b>Category:</b> {{ $product->categoryId->name }}</p>
         </div>
-
-
+      </div>
     </div>
+  </div>
 @endsection

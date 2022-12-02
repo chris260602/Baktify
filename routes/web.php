@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\RegisterController;
 use Illuminate\Support\Facades\Route;
@@ -37,3 +39,13 @@ Route::get("/register", [RegisterController::class, "index"])->middleware("guest
 Route::post("/register", [RegisterController::class, "handleRegister"]);
 Route::get("/products", [ProductsController::class, "index"]);
 Route::get("/products/{id}", [ProductsController::class, "viewProductDetail"]);
+Route::delete("/products/{id}",[ProductsController::class, "deleteProduct"]);
+
+Route::get("/add-products", [ProductsController::class, "viewAddProduct"]);
+Route::post("/add-products", [ProductsController::class, "addProduct"]);
+
+Route::get("/edit-product/{id}", [ProductsController::class, "viewEditProduct"]);
+Route::post("/edit-product/{id}", [ProductsController::class, "editProduct"]);
+
+Route::get('/add-category', [CategoryController::class, 'index']);
+Route::post('/add-category', [CategoryController::class, 'addCategory']);
