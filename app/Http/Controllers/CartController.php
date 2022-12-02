@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Cart;
 use App\Http\Requests\StoreCartRequest;
 use App\Http\Requests\UpdateCartRequest;
+use App\Models\Product;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
@@ -19,7 +20,11 @@ class CartController extends Controller
     {
         $user_id = auth()->user()->id;
         $carts = Cart::with("product")->where("user_id", $user_id)->get();
-        return view("pages.cart")->with("carts", $carts);
+        $totalAmount = 0;
+        foreach ($carts as $cart) {
+            $totalAmount += $cart->product->price * $cart->qty;
+        }
+        return view("pages.cart")->with("carts", $carts)->with("amount", $totalAmount);
     }
     /**
      * Show the form for creating a new resource.
@@ -31,37 +36,23 @@ class CartController extends Controller
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreCartRequest  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(StoreCartRequest $request)
+    public function add(Request $req, $id)
     {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Cart  $cart
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Cart $cart)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Cart  $cart
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Cart $cart)
-    {
-        //
+        $product = Product::find($id);
+        $user_id = auth()->user()->id;
+        $cartData = Cart::with("product")->where("user_id", $user_id)
+            ->where("product_id", $id)
+            ->first();
+        if ($product != null) {
+            if ($cartData && $product->stock >= $cartData->qty + 1) {
+                $cartData->qty += 1;
+                $cartData->update();
+            } else if ($product->stock >= 1) {
+                Cart::create(['product_id' => $id, 'user_id' => $user_id, 'qty' => 1]);
+            }
+        }
+        $req->session()->flash('addedCart', true);
+        return redirect("/products");
     }
 
     /**
@@ -71,17 +62,22 @@ class CartController extends Controller
      * @param  \App\Models\Cart  $cart
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Cart $cart)
+    public function update(Request $request)
     {
-        if ($request->qty < 0) {
+        $validated = $request->validate([
+            'qty' => ['required', 'numeric', 'min: 0',],
+        ]);
+        $product = Product::find($request->productId);
+        if ($request->qty == 0) {
+            Cart::find($request->id)->delete();
+            return redirect('/cart')->with('deleteAlert', true);
+        } else if ($product->stock < $request->qty) {
+            return redirect('/cart')->with('failAlert', true);
+        } else {
+            $product->qty = $request->qty;
+            Cart::find($request->id)->update(['qty' => $request->qty]);
+            return redirect('/cart')->with('updateAlert', true);
         }
-        // else if(){
-        //     //qty melewati stock
-        // }
-        else {
-            //Stok pas
-        }
-        dd($request->qty, $request->id);
     }
 
     /**
@@ -90,8 +86,8 @@ class CartController extends Controller
      * @param  \App\Models\Cart  $cart
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Cart $cart)
+    public function destroy($id)
     {
-        //
+        Cart::find($id)->delete();
     }
 }

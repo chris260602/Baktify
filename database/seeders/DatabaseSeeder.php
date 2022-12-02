@@ -32,7 +32,7 @@ class DatabaseSeeder extends Seeder
             ]);
             Storage::putFileAs('/productImages', 'public/images/seederImages/' . 'dummyProduct' . $i . '.jpg', 'dummyProduct' . $i . '.jpg');
         }
-        \App\Models\Cart::factory(10)->create();
+        // \App\Models\Cart::factory(10)->create();
         User::factory()->create([
             'email' => 'admin@gmail.com',
             'password' => Hash::make('123123123'),

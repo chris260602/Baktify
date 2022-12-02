@@ -2,14 +2,14 @@
 
 
 use App\Http\Controllers\CartController;
-
+use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\CategoryController;
 
 use App\Http\Controllers\LoginController;
-use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\TransactionController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -50,7 +50,13 @@ Route::put("/profile", [ProfileController::class, "update"])->middleware("auth")
 Route::get("/profile/update", [ProfileController::class, "viewUpdate"])->middleware("auth");
 
 Route::get("/cart", [CartController::class, "index"])->middleware("checkMember");
+Route::put("/cart/add/{id}", [CartController::class, "add"])->middleware("checkMember");
 Route::put("/cart/update/{id}", [CartController::class, "update"])->middleware("checkMember");
+
+Route::get("/checkout", [CheckoutController::class, "index"])->middleware("checkMember");
+Route::post("/checkout/submit", [CheckoutController::class, "submit"])->middleware("checkMember");
+
+Route::get("/transactions", [TransactionController::class, "index"])->middleware("checkMember");
 
 Route::delete("/products/{id}", [ProductsController::class, "deleteProduct"]);
 

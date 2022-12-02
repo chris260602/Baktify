@@ -18,6 +18,11 @@
             alert('Product Successfully Edited')
         </script>
     @endif
+    @if (Session::has('addedCart'))
+        <script>
+            alert('Product Successfully Added to Cart')
+        </script>
+    @endif
     <div class="container p-5">
         <div class="row mb-5">
             <div class="col-12 d-flex justify-content-between">
@@ -51,12 +56,19 @@
                                     <div class="card-body">
                                         <h5 class="card-title text-dark">{{ $product->name }}</h5>
                                         <p class="card-text" style="color: #838383">IDR {{ $product->price }}</p>
-                                        <p class="bg-info rounded-pill w-50 m-auto mb-4 text-white">{{ $product->categoryId->name }}
+                                        <p class="bg-info rounded-pill w-50 m-auto mb-4 text-white">
+                                            {{ $product->categoryId->name }}
                                         </p>
                                         @auth
                                             @if (auth()->user()->role === '0')
                                                 <div class="d-flex justify-content-center align-items-center">
-                                                    <a href="#" class="btn btn-primary">Add to Cart</a>
+
+                                                    <form method="POST" action="/cart/add/{{ $product->id }}">
+                                                        @csrf
+                                                        @method('PUT')
+                                                        <button type="submit" class="btn btn-primary">Add to Cart</button>
+                                                    </form>
+
                                                 </div>
                                             @endif
                                             @if (auth()->user()->role === '1')

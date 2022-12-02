@@ -27,10 +27,10 @@
                             </li>
                         </ul>
                         <div class="d-flex align-items-center">
-                            <p class="mb-0 me-2 fw-bold">Cart</p>
+                            <a href="/cart" class="mb-0 me-2 link-dark nav-link active fw-bold">Cart</a>
                             <div class="d-flex flex-column text-secondary">
                                 <p class="m-0">Member</p>
-                                <p class="m-0"><a class="text-decoration-none text-secondary" href="#">View
+                                <p class="m-0"><a class="text-decoration-none text-secondary" href="/profile">View
                                         profile</a></p>
                             </div>
 
@@ -52,7 +52,8 @@
                         </ul>
                         <div class="d-flex flex-column text-secondary">
                             <p class="m-0">Admin</p>
-                            <p class="m-0"><a class="text-decoration-none text-secondary" href="#">View profile</a>
+                            <p class="m-0"><a class="text-decoration-none text-secondary" href="/profile">View
+                                    profile</a>
                             </p>
                         </div>
                     @endif
