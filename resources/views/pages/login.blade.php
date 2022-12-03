@@ -30,7 +30,7 @@
                             @enderror
                             <input type="email" class="form-control @error('email') is-invalid @enderror" name="email"
                                 id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email"
-                                value="{{ old('email') }}">
+                                value="{{ $email_cookie }}">
 
                         </div>
                         <div class="form-group mb-3">
@@ -45,7 +45,12 @@
                                 value="{{ old('password') }}">
                         </div>
                         <div class="form-check mb-3">
-                            <input type="checkbox" class="form-check-input" id="EmailCheck1">
+                            @if ($email_cookie != null)
+                                <input type="checkbox" class="form-check-input" id="EmailCheck1" name="EmailCheck1" checked>
+                            @else
+                                <input type="checkbox" class="form-check-input" id="EmailCheck1" name="EmailCheck1">
+                            @endif
+
                             <label class="form-check-label" for="EmailCheck1">Remember Email</label>
                         </div>
                         <button type="submit" class="btn btn-primary w-100">Submit</button>
