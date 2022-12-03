@@ -34,8 +34,11 @@
 
                             <input type="hidden" id="Id" name="id" value="{{ $cart->id }}">
                             <input type="hidden" id="productId" name="productId" value="{{ $cart->product->id }}">
-                            <td><img class="card-img-top"
-                                    src="/storage/productImages/{{ $cart->product->image }}" />{{ $cart->product->name }}
+                            <td>
+                                <div class="d-flex flex-row align-items-center">
+                                    <img class="rounded-circle" src="/storage/productImages/{{$cart->product->image}}" style="width: 50px; height: 50px;">
+                                    <p class="my-0 mx-2">{{ $cart->product->name }}</p>
+                                </div>
                             </td>
                             <td>{{ $cart->product->price }}</td>
                             <td>{{ $cart->qty }}
