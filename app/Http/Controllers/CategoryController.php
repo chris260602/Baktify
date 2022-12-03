@@ -16,7 +16,7 @@ class CategoryController extends Controller
     public function addCategory(Request $req){
 
         $validated = $req->validate([
-            'name' => ['required', 'unique:categories'],
+            'name' => ['required', 'unique:categories', 'alpha'],
         ]);
 
         Category::create($validated);

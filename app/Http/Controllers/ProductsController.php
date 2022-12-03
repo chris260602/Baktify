@@ -13,7 +13,7 @@ class ProductsController extends Controller
     public function index(Request $req)
     {
         if ($req->query('q') === null) {
-            $products = Product::all();
+            $products = Product::simplePaginate(12);
 
             return view("pages/products")->with('products', $products);
         } else {
