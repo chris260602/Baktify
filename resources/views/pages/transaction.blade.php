@@ -29,8 +29,11 @@
                         @foreach ($singleTransaction['0'] as $transaction)
                             <tr>
 
-                                <td><img class="card-img-top"
-                                        src="/storage/productImages/{{ $transaction->product->image }}" />{{ $transaction->product->name }}
+                                <td>
+                                    <div class="d-flex flex-row align-items-center">
+                                        <img class="rounded-circle" src="/storage/productImages/{{$transaction->product->image}}" style="width: 50px; height: 50px;">
+                                        <p class="my-0 mx-2">{{ $transaction->product->name }}</p>
+                                    </div>
                                 </td>
                                 <td>{{ $transaction->product->price }}</td>
                                 <td>{{ $transaction->qty }}
