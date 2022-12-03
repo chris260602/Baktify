@@ -66,7 +66,12 @@
                                                     <form method="POST" action="/cart/add/{{ $product->id }}">
                                                         @csrf
                                                         @method('PUT')
-                                                        <button type="submit" class="btn btn-primary">Add to Cart</button>
+                                                        @if ($product->stock > 0)
+                                                            <button type="submit" class="btn btn-primary">Add to Cart</button>
+                                                        @else
+                                                            <button type="submit" class="btn btn-primary"
+                                                                disabled>Unavailable</button>
+                                                        @endif
                                                     </form>
 
                                                 </div>
@@ -91,6 +96,10 @@
                     @endif
                 </div>
             </div>
+        </div>
+
+        <div class="d-flex align-items-center justify-content-center mt-5">
+            {{ $products->links() }}
         </div>
 
     </div>
