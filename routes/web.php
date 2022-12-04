@@ -37,8 +37,7 @@ Route::get("/logoff", [LoginController::class, "logoff"]);
 
 Route::get('/about-us', function () {
     return view('pages/aboutUs');
-})->middleware("checkAdmin"); //Testing
-
+});
 
 Route::get("/register", [RegisterController::class, "index"])->middleware("guest");
 Route::post("/register", [RegisterController::class, "handleRegister"]);

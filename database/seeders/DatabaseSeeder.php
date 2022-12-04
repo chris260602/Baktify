@@ -26,7 +26,7 @@ class DatabaseSeeder extends Seeder
                 'name' => $categories[$i],
             ]);
         }
-        for ($i = 1; $i <= 10; $i++) {
+        for ($i = 1; $i <= 13; $i++) {
             Product::factory()->create([
                 'image' => 'dummyProduct' . $i . '.jpg',
             ]);

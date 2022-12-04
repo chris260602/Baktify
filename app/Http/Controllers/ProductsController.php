@@ -18,13 +18,13 @@ class ProductsController extends Controller
             return view("pages/products")->with('products', $products);
         } else {
             $query = "%".$req->query('q')."%";
-            $products = Product::where('name', 'like', [$query])->get();
+            $products = Product::where('name', 'like', [$query])->simplePaginate(12);
 
             if (count($products) === 0) {
                 $error = "No products match for '".$req->query('q')."'";
                 return view("pages/products")->with('products', $products)->with('error',$error);
             }else{
-                return view("pages/products")->with('products', $products);
+                return view("pages/products")->with('products', $products->appends(['q' => $req->query('q')]));
             }
         }
     }
